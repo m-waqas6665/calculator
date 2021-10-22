@@ -1,43 +1,43 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 
-
 const Clear_button = props => {
+  const {setDisplay, number} = props;
   return (
-    <TouchableOpacity onPress={()=>{props.setDisplay('')}} style={styles.button}>
-      <Text style={styles.text}> {props.number} </Text>
+    <TouchableOpacity onPress = {() => {setDisplay('')}} style={styles.button}>
+      <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 const Equal_button = props => {
-
-  const calculate= ()=>{
-    let expression = props.display;
-    //expression = 'a' + expression + 'b';
-    props.setDisplay(eval(expression));
- }
+  const {setDisplay, display, number} = props;
+  const calculate = () => {
+    let expression = display;
+    setDisplay(eval(expression));
+  };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={()=>{calculate()}}>
-      <Text style={styles.text}> {props.number} </Text>
+    <TouchableOpacity style={styles.button} onPress={calculate}>
+      <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 
 const Row = props => {
-  // props.setDisplay("123");
+  const {setDisplay, display, number} = props;
   return (
     <View style={styles.row}>
-      <Clear_button number={props.number[0]} display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Equal_button number={props.number[1]} display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
+      <Clear_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Equal_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
     </View>
   );
 };
 
 const ActionPad = props => {
+  const {setDisplay, display} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="C=" display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
+      <Row number="C=" display={display} setDisplay={setDisplay} />
     </View>
   );
 };

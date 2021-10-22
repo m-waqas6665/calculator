@@ -1,38 +1,40 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 
 const Digit_button = props => {
-
+  const {setDisplay, display, number} = props;
   const handle = () => {
-    let ex = props.display;
-    isNaN(ex.charAt(ex.length - 1)) ?
-      props.setDisplay(ex)
-      : props.setDisplay(ex + "" + props.number);
+    let ex = display;
+    if (!isNaN(ex.charAt(ex.length - 1))) {
+      ex = ex + '' + number;
+    }
+    setDisplay(ex);
   };
 
   return (
-    <TouchableOpacity onPress={() => { handle() }} style={styles.button}>
-      <Text style={styles.text}> {props.number} </Text>
+    <TouchableOpacity onPress={handle} style={styles.button}>
+      <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 
 const Row = props => {
-  // props.setDisplay("123");
+  const {setDisplay, display, number} = props;
   return (
     <View style={styles.row}>
-      <Digit_button number={props.number[0]} display={props.display} setDisplay={(val) => props.setDisplay(val)} />
-      <Digit_button number={props.number[1]} display={props.display} setDisplay={(val) => props.setDisplay(val)} />
-      <Digit_button number={props.number[2]} display={props.display} setDisplay={(val) => props.setDisplay(val)} />
-      <Digit_button number={props.number[3]} display={props.display} setDisplay={(val) => props.setDisplay(val)} />
+      <Digit_button number={number[0]} display={display} setDisplay={setDisplay} />
+      <Digit_button number={number[1]} display={display} setDisplay={setDisplay} />
+      <Digit_button number={number[2]} display={display} setDisplay={setDisplay} />
+      <Digit_button number={number[3]} display={display} setDisplay={setDisplay} />
     </View>
   );
 };
 
 const OperatorPad = props => {
+  const {setDisplay, display} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="+-*/" display={props.display} setDisplay={(val) => props.setDisplay(val)} />
+      <Row number="+-*/" display={display} setDisplay={setDisplay} />
     </View>
   );
 };

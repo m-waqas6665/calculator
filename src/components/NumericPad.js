@@ -2,31 +2,33 @@ import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 
 const Digit_button = props => {
+  const {setDisplay, display, number} = props;
   return (
-    <TouchableOpacity onPress={()=>{props.setDisplay(props.display+""+props.number)}} style={styles.button}>
-      <Text style={styles.text}> {props.number} </Text>
+    <TouchableOpacity onPress={()=>{setDisplay(display+""+number)}} style={styles.button}>
+      <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 
 const Row = props => {
-  // props.setDisplay("123");
+  const {setDisplay, display, number} = props;
   return (
     <View style={styles.row}>
-      <Digit_button number={props.number[0]} display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Digit_button number={props.number[1]} display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Digit_button number={props.number[2]} display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
+      <Digit_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Digit_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Digit_button number={number[2]} display={display} setDisplay={(val)=>setDisplay(val)} />
     </View>
   );
 };
 
 const NumericPad = props => {
+  const {setDisplay, display} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="123" display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Row number="456" display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Row number="789" display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
-      <Row number=".00" display={props.display} setDisplay={(val)=>props.setDisplay(val)} />
+      <Row number="123" display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Row number="456" display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Row number="789" display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Row number=".00" display={display} setDisplay={(val)=>setDisplay(val)} />
     </View>
   );
 };

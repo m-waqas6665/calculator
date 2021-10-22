@@ -1,15 +1,16 @@
 import React from 'react';
-import {View,Text} from 'react-native';
+import {View} from 'react-native';
 import NumericPad from './NumericPad';
 import OperatorPad from './OperatorsPad';
 import ActionPad from './ActionPad';
 
 const Keypad = props => {
+  const {display, setDisplay} = props;
   return (
     <View>
-      <NumericPad display={props.display} setDisplay={props.setDisplay} />
-      <OperatorPad display={props.display} setDisplay={props.setDisplay} />
-      <ActionPad display={props.display} setDisplay={props.setDisplay} />
+      <NumericPad display={display} setDisplay={setDisplay} />
+      <OperatorPad display={display} setDisplay={setDisplay} />
+      <ActionPad display={display} setDisplay={setDisplay} />
     </View>
   );
 };
