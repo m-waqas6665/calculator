@@ -1,37 +1,47 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {appendDisplay} from '../actions/index';
 
 const Digit_button = props => {
-  const {setDisplay, display, number} = props;
+  const {number, appendDisplay} = props;
   return (
-    <TouchableOpacity onPress={()=>{setDisplay(display+""+number)}} style={styles.button}>
+    <TouchableOpacity
+      onPress={() => appendDisplay(number)}
+      style={styles.button}>
       <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 
 const Row = props => {
-  const {setDisplay, display, number} = props;
+  const {number, appendDisplay} = props;
   return (
     <View style={styles.row}>
-      <Digit_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Digit_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Digit_button number={number[2]} display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Digit_button number={number[0]} appendDisplay={appendDisplay} />
+      <Digit_button number={number[1]} appendDisplay={appendDisplay} />
+      <Digit_button number={number[2]} appendDisplay={appendDisplay} />
     </View>
   );
 };
 
 const NumericPad = props => {
-  const {setDisplay, display} = props;
+  const {appendDisplay} = props;
+
   return (
     <View style={styles.numericPad}>
-      <Row number="123" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number="456" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number="789" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number=".00" display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Row number="123" appendDisplay={appendDisplay} />
+      <Row number="456" appendDisplay={appendDisplay} />
+      <Row number="789" appendDisplay={appendDisplay} />
+      <Row number=".00" appendDisplay={appendDisplay} />
     </View>
   );
 };
+
+const mapDispatchToProps = {
+  appendDisplay: val => appendDisplay(val),
+};
+export default connect(null, mapDispatchToProps)(NumericPad);
 
 const styles = StyleSheet.create({
   button: {
@@ -59,5 +69,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default NumericPad;

@@ -1,19 +1,25 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {updateDisplay} from '../actions/index';
+import {connect} from 'react-redux';
 
 const Clear_button = props => {
-  const {setDisplay, number} = props;
+  const {updateDisplay, number} = props;
   return (
-    <TouchableOpacity onPress = {() => {setDisplay('')}} style={styles.button}>
+    <TouchableOpacity
+      onPress={() => {
+        updateDisplay('');
+      }}
+      style={styles.button}>
       <Text style={styles.text}> {number} </Text>
     </TouchableOpacity>
   );
 };
 const Equal_button = props => {
-  const {setDisplay, display, number} = props;
+  const {updateDisplay, display, number} = props;
   const calculate = () => {
     let expression = display;
-    setDisplay(eval(expression));
+    updateDisplay(eval(expression));
   };
 
   return (
@@ -24,23 +30,42 @@ const Equal_button = props => {
 };
 
 const Row = props => {
-  const {setDisplay, display, number} = props;
+  const {updateDisplay, display, number} = props;
   return (
     <View style={styles.row}>
-      <Clear_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Equal_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Clear_button
+        number={number[0]}
+        display={display}
+        updateDisplay={val => updateDisplay(val)}
+      />
+      <Equal_button
+        number={number[1]}
+        display={display}
+        updateDisplay={val => updateDisplay(val)}
+      />
     </View>
   );
 };
 
 const ActionPad = props => {
-  const {setDisplay, display} = props;
+  const {updateDisplay, display} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="C=" display={display} setDisplay={setDisplay} />
+      <Row number="C=" display={display} updateDisplay={updateDisplay} />
     </View>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    display: state.changeTheDisplay,
+  };
+};
+
+const mapDispatchToProps = {
+  updateDisplay: val => updateDisplay(val),
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ActionPad);
 
 const styles = StyleSheet.create({
   button: {
@@ -68,5 +93,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default ActionPad;

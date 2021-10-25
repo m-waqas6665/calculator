@@ -1,11 +1,12 @@
 import React from 'react';
 import {Text, StyleSheet, TextInput} from 'react-native';
+import {connect} from 'react-redux';
 
 const Display = props => {
-  const {value} = props;
+  const {display} = props;
   return (
     <TextInput editable={false} id="display" style={styles.display}>
-      <Text style={styles.text}> {value} </Text>
+      <Text style={styles.text}> {display} </Text>
     </TextInput>
   );
 };
@@ -30,4 +31,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Display;
+const mapStateToProps = state => {
+  return {
+    display: state.changeTheDisplay,
+  };
+};
+
+export default connect(mapStateToProps)(Display);

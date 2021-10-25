@@ -1,16 +1,15 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
-
+import {connect} from 'react-redux';
+import {appendDisplay} from '../actions/index';
 const Digit_button = props => {
-  const {setDisplay, display, number} = props;
+  const {display, number, appendDisplay} = props;
   const handle = () => {
     let ex = display;
     if (!isNaN(ex.charAt(ex.length - 1))) {
-      ex = ex + '' + number;
+      appendDisplay(number);
     }
-    setDisplay(ex);
   };
-
   return (
     <TouchableOpacity onPress={handle} style={styles.button}>
       <Text style={styles.text}> {number} </Text>
@@ -19,25 +18,53 @@ const Digit_button = props => {
 };
 
 const Row = props => {
-  const {setDisplay, display, number} = props;
+  const {display, number, appendDisplay} = props;
   return (
     <View style={styles.row}>
-      <Digit_button number={number[0]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[1]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[2]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[3]} display={display} setDisplay={setDisplay} />
+      <Digit_button
+        number={number[0]}
+        display={display}
+        appendDisplay={appendDisplay}
+      />
+      <Digit_button
+        number={number[1]}
+        display={display}
+        appendDisplay={appendDisplay}
+      />
+      <Digit_button
+        number={number[2]}
+        display={display}
+        appendDisplay={appendDisplay}
+      />
+      <Digit_button
+        number={number[3]}
+        display={display}
+        appendDisplay={appendDisplay}
+      />
     </View>
   );
 };
 
 const OperatorPad = props => {
-  const {setDisplay, display} = props;
+  const {display, appendDisplay} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="+-*/" display={display} setDisplay={setDisplay} />
+      <Row number="+-*/" display={display} appendDisplay={appendDisplay} />
     </View>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    display: state.changeTheDisplay,
+  };
+};
+
+const mapDispatchToProps = {
+  appendDisplay: val => appendDisplay(val),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OperatorPad);
 
 const styles = StyleSheet.create({
   button: {
@@ -65,5 +92,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default OperatorPad;
