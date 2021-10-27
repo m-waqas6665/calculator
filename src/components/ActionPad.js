@@ -6,13 +6,14 @@ import Button from './Button';
 
 const ActionPad = props => {
   const {updateDisplay, display} = props;
-  const calculate = () => {
-    updateDisplay(eval(display));
-  };
   return (
     <View style={styles.actionPad}>
       <Button title="C" styles={styles} setDisplay={() => updateDisplay('')} />
-      <Button title="=" styles={styles} setDisplay={calculate} />
+      <Button
+        title="="
+        styles={styles}
+        setDisplay={() => updateDisplay(eval(display))}
+      />
     </View>
   );
 };
