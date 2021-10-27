@@ -1,8 +1,8 @@
-import changeTheDisplay from './changeTheDisplay';
+import calculatorReducer from './calculatorReducer';
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
-  changeTheDisplay,
+  calculatorReducer,
 });
 
 export default rootReducer;

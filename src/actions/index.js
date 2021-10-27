@@ -1,15 +1,15 @@
-// export const appendDisplay = () => { type: 'APPEND' }
+import * as operation from '../constants/actionTypes/calculatorReducer/calculatorReducer';
 
 export const appendDisplay = value => {
   return {
-    type: 'APPEND',
+    type: operation.append,
     value: value,
   };
 };
 
 export const updateDisplay = value => {
   return {
-    type: 'UPDATE',
+    type: operation.update,
     value: value,
   };
 };

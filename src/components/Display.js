@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    display: state.changeTheDisplay,
+    display: state.calculatorReducer,
   };
 };
 

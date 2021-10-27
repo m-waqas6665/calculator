@@ -1,71 +1,34 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
-import {appendDisplay} from '../actions/index';
+import {View, StyleSheet} from 'react-native';
+import DigitButton from './DigitButton';
 
-const Digit_button = props => {
-  const {number, appendDisplay} = props;
-  return (
-    <TouchableOpacity
-      onPress={() => appendDisplay(number)}
-      style={styles.button}>
-      <Text style={styles.text}> {number} </Text>
-    </TouchableOpacity>
-  );
-};
-
-const Row = props => {
-  const {number, appendDisplay} = props;
-  return (
-    <View style={styles.row}>
-      <Digit_button number={number[0]} appendDisplay={appendDisplay} />
-      <Digit_button number={number[1]} appendDisplay={appendDisplay} />
-      <Digit_button number={number[2]} appendDisplay={appendDisplay} />
-    </View>
-  );
-};
-
-const NumericPad = props => {
-  const {appendDisplay} = props;
-
+const NumericPad = () => {
   return (
     <View style={styles.numericPad}>
-      <Row number="123" appendDisplay={appendDisplay} />
-      <Row number="456" appendDisplay={appendDisplay} />
-      <Row number="789" appendDisplay={appendDisplay} />
-      <Row number=".00" appendDisplay={appendDisplay} />
+      <DigitButton number="1" />
+      <DigitButton number="2" />
+      <DigitButton number="3" />
+      <DigitButton number="4" />
+      <DigitButton number="5" />
+      <DigitButton number="6" />
+      <DigitButton number="7" />
+      <DigitButton number="8" />
+      <DigitButton number="9" />
+      <DigitButton number="." />
+      <DigitButton number="0" />
+      <DigitButton number="0" />
     </View>
   );
 };
 
-const mapDispatchToProps = {
-  appendDisplay: val => appendDisplay(val),
-};
-export default connect(null, mapDispatchToProps)(NumericPad);
+export default NumericPad;
 
 const styles = StyleSheet.create({
-  button: {
-    borderWidth: 3,
-    borderColor: 'rgba(0,0,0,0.2)',
+  numericPad: {
+    top: 70,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 100,
-    height: 100,
-    backgroundColor: 'black',
-    borderRadius: 50,
-    flex: 1,
-  },
-  text: {
-    fontSize: 30,
-    color: 'white',
-  },
-  row: {
-    flexDirection: 'row',
-    width: 400,
-    height: 120,
-  },
-  numericPad: {
-    top: 50,
-    alignItems: 'center',
   },
 });
