@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
+
 import {appendDisplay} from '../actions';
 import Button from './Button';
 
@@ -14,10 +15,10 @@ const OperatorPad = props => {
   };
   return (
     <View style={styles.operatorPad}>
-      <Button title="+" styles={styles} action={checkandappend} />
-      <Button title="-" styles={styles} action={checkandappend} />
-      <Button title="*" styles={styles} action={checkandappend} />
-      <Button title="/" styles={styles} action={checkandappend} />
+      <Button title="+" styles={styles} action={() => checkandappend('+')} />
+      <Button title="-" styles={styles} action={() => checkandappend('-')} />
+      <Button title="*" styles={styles} action={() => checkandappend('*')} />
+      <Button title="/" styles={styles} action={() => checkandappend('/')} />
     </View>
   );
 };

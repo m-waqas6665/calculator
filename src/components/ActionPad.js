@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
+
 import {updateDisplay} from '../actions';
 import Button from './Button';
 
 const ActionPad = props => {
   const {updateDisplay, display} = props;
+
   const clear = () => updateDisplay('');
+
   const calculate = () => updateDisplay(eval(display));
   return (
     <View style={styles.actionPad}>

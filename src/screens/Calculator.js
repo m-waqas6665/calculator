@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
+
 import Display from '../components/Display';
 import Keypad from '../components/Keypad';
 const Calculator = () => {

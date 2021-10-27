@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, StyleSheet, TextInput} from 'react-native';
 import {connect} from 'react-redux';
+import {Text, StyleSheet, TextInput} from 'react-native';
 
 const Display = props => {
   const {display} = props;
