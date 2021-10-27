@@ -7,26 +7,23 @@ import Button from './Button';
 const OperatorPad = props => {
   const {appendDisplay, display} = props;
 
-  const handle = title => {
-    let ex = display;
-    if (!isNaN(ex.charAt(ex.length - 1))) {
+  const checkandappend = title => {
+    if (!isNaN(display.charAt(display.length - 1))) {
       appendDisplay(title);
     }
   };
   return (
     <View style={styles.operatorPad}>
-      <Button title="+" styles={styles} setDisplay={handle} />
-      <Button title="-" styles={styles} setDisplay={handle} />
-      <Button title="*" styles={styles} setDisplay={handle} />
-      <Button title="/" styles={styles} setDisplay={handle} />
+      <Button title="+" styles={styles} action={checkandappend} />
+      <Button title="-" styles={styles} action={checkandappend} />
+      <Button title="*" styles={styles} action={checkandappend} />
+      <Button title="/" styles={styles} action={checkandappend} />
     </View>
   );
 };
-const mapStateToProps = state => {
-  return {
-    display: state.calculatorReducer,
-  };
-};
+const mapStateToProps = state => ({
+  display: state.calculator.data,
+});
 
 const mapDispatchToProps = {
   appendDisplay: appendDisplay,

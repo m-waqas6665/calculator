@@ -1,15 +1,17 @@
-import * as calculatorDisplay from '../constants/actionTypes/calculator';
-const intialState = '';
+import * as actions from '../constants/actionTypes/calculator';
+const intialState = {
+  data: '',
+};
 
-const calculatorReducer = (state = intialState, action) => {
+const calculator = (state = intialState, action) => {
   switch (action.type) {
-    case calculatorDisplay.append:
-      return state + action.value;
-    case calculatorDisplay.update:
-      return action.value;
+    case actions.append:
+      return {...state, data: state.data + action.value};
+    case actions.update:
+      return {...state, data: action.value};
     default:
-      return intialState;
+      return state;
   }
 };
 
-export default calculatorReducer;
+export default calculator;

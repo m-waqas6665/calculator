@@ -8,18 +8,18 @@ const NumericPad = props => {
   const {appendDisplay} = props;
   return (
     <View style={styles.numericPad}>
-      <Button title="1" styles={styles} setDisplay={appendDisplay} />
-      <Button title="2" styles={styles} setDisplay={appendDisplay} />
-      <Button title="3" styles={styles} setDisplay={appendDisplay} />
-      <Button title="4" styles={styles} setDisplay={appendDisplay} />
-      <Button title="5" styles={styles} setDisplay={appendDisplay} />
-      <Button title="6" styles={styles} setDisplay={appendDisplay} />
-      <Button title="7" styles={styles} setDisplay={appendDisplay} />
-      <Button title="8" styles={styles} setDisplay={appendDisplay} />
-      <Button title="9" styles={styles} setDisplay={appendDisplay} />
-      <Button title="." styles={styles} setDisplay={appendDisplay} />
-      <Button title="0" styles={styles} setDisplay={appendDisplay} />
-      <Button title="0" styles={styles} setDisplay={appendDisplay} />
+      <Button title="1" styles={styles} action={appendDisplay} />
+      <Button title="2" styles={styles} action={appendDisplay} />
+      <Button title="3" styles={styles} action={appendDisplay} />
+      <Button title="4" styles={styles} action={appendDisplay} />
+      <Button title="5" styles={styles} action={appendDisplay} />
+      <Button title="6" styles={styles} action={appendDisplay} />
+      <Button title="7" styles={styles} action={appendDisplay} />
+      <Button title="8" styles={styles} action={appendDisplay} />
+      <Button title="9" styles={styles} action={appendDisplay} />
+      <Button title="." styles={styles} action={appendDisplay} />
+      <Button title="0" styles={styles} action={appendDisplay} />
+      <Button title="" styles={styles} action={() => {}} />
     </View>
   );
 };

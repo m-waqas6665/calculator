@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 const Display = props => {
   const {display} = props;
   return (
-    <TextInput editable={false} id="display" style={styles.display}>
+    <TextInput editable={false} style={styles.display}>
       <Text style={styles.text}> {display} </Text>
     </TextInput>
   );
@@ -31,10 +31,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
-  return {
-    display: state.calculatorReducer,
-  };
-};
+const mapStateToProps = state => ({
+  display: state.calculator.data,
+});
 
-export default connect(mapStateToProps)(Display);
+export default connect(mapStateToProps, null)(Display);
