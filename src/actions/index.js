@@ -1,4 +1,4 @@
-import * as operation from '../constants/actionTypes/calculatorReducer/calculatorReducer';
+import * as operation from '../constants/actionTypes/calculator';
 
 export const appendDisplay = value => {
   return {

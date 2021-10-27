@@ -1,11 +1,11 @@
-import * as operation from '../constants/actionTypes/calculatorReducer/calculatorReducer';
+import * as calculatorDisplay from '../constants/actionTypes/calculator';
 const intialState = '';
 
 const calculatorReducer = (state = intialState, action) => {
   switch (action.type) {
-    case operation.append:
+    case calculatorDisplay.append:
       return state + action.value;
-    case operation.update:
+    case calculatorDisplay.update:
       return action.value;
     default:
       return intialState;

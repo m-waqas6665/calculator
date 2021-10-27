@@ -1,27 +1,34 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import DigitButton from './DigitButton';
+import {connect} from 'react-redux';
+import {appendDisplay} from '../actions';
+import Button from './Button';
 
-const NumericPad = () => {
+const NumericPad = props => {
+  const {appendDisplay} = props;
   return (
     <View style={styles.numericPad}>
-      <DigitButton number="1" />
-      <DigitButton number="2" />
-      <DigitButton number="3" />
-      <DigitButton number="4" />
-      <DigitButton number="5" />
-      <DigitButton number="6" />
-      <DigitButton number="7" />
-      <DigitButton number="8" />
-      <DigitButton number="9" />
-      <DigitButton number="." />
-      <DigitButton number="0" />
-      <DigitButton number="0" />
+      <Button title="1" styles={styles} setDisplay={appendDisplay} />
+      <Button title="2" styles={styles} setDisplay={appendDisplay} />
+      <Button title="3" styles={styles} setDisplay={appendDisplay} />
+      <Button title="4" styles={styles} setDisplay={appendDisplay} />
+      <Button title="5" styles={styles} setDisplay={appendDisplay} />
+      <Button title="6" styles={styles} setDisplay={appendDisplay} />
+      <Button title="7" styles={styles} setDisplay={appendDisplay} />
+      <Button title="8" styles={styles} setDisplay={appendDisplay} />
+      <Button title="9" styles={styles} setDisplay={appendDisplay} />
+      <Button title="." styles={styles} setDisplay={appendDisplay} />
+      <Button title="0" styles={styles} setDisplay={appendDisplay} />
+      <Button title="0" styles={styles} setDisplay={appendDisplay} />
     </View>
   );
 };
 
-export default NumericPad;
+const mapDispatchToProps = {
+  appendDisplay: appendDisplay,
+};
+
+export default connect(null, mapDispatchToProps)(NumericPad);
 
 const styles = StyleSheet.create({
   numericPad: {
@@ -30,5 +37,19 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    borderWidth: 3,
+    borderColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 140,
+    height: 100,
+    backgroundColor: 'black',
+    borderRadius: 50,
+  },
+  text: {
+    fontSize: 40,
+    color: 'white',
   },
 });

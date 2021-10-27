@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import NumericPad from './NumericPad';
 import OperatorPad from './OperatorsPad';
 import ActionPad from './ActionPad';
-import {StyleSheet} from 'react-native';
 
 const Keypad = props => {
   return (
