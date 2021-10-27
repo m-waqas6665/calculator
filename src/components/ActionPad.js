@@ -7,8 +7,7 @@ import Button from './Button';
 const ActionPad = props => {
   const {updateDisplay, display} = props;
   const calculate = () => {
-    let expression = display;
-    updateDisplay(eval(expression));
+    updateDisplay(eval(display));
   };
   return (
     <View style={styles.actionPad}>
