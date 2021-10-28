@@ -1,15 +1,19 @@
-import * as operation from '../constants/actionTypes/calculator';
+import * as action from '../constants/actionTypes/calculator';
 
 export const appendDisplay = value => {
-  return {
-    type: operation.append,
-    value: value,
+  return async dispatch => {
+    dispatch({
+      type: action.append,
+      value: value,
+    });
   };
 };
 
 export const updateDisplay = value => {
-  return {
-    type: operation.update,
-    value: value,
+  return async dispatch => {
+    dispatch({
+      type: action.update,
+      value: value,
+    });
   };
 };
