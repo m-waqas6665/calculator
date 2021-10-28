@@ -1,45 +1,44 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
 
-const Digit_button = props => {
-  const {setDisplay, display, number} = props;
-  const handle = () => {
-    let ex = display;
-    if (!isNaN(ex.charAt(ex.length - 1))) {
-      ex = ex + '' + number;
-    }
-    setDisplay(ex);
-  };
-
-  return (
-    <TouchableOpacity onPress={handle} style={styles.button}>
-      <Text style={styles.text}> {number} </Text>
-    </TouchableOpacity>
-  );
-};
-
-const Row = props => {
-  const {setDisplay, display, number} = props;
-  return (
-    <View style={styles.row}>
-      <Digit_button number={number[0]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[1]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[2]} display={display} setDisplay={setDisplay} />
-      <Digit_button number={number[3]} display={display} setDisplay={setDisplay} />
-    </View>
-  );
-};
+import {appendDisplay} from '../actions';
+import Button from './Button';
 
 const OperatorPad = props => {
-  const {setDisplay, display} = props;
+  const {appendDisplay, display} = props;
+
+  const checkandappend = title => {
+    if (!isNaN(display.charAt(display.length - 1))) {
+      appendDisplay(title);
+    }
+  };
   return (
-    <View style={styles.numericPad}>
-      <Row number="+-*/" display={display} setDisplay={setDisplay} />
+    <View style={styles.operatorPad}>
+      <Button title="+" styles={styles} action={() => checkandappend('+')} />
+      <Button title="-" styles={styles} action={() => checkandappend('-')} />
+      <Button title="*" styles={styles} action={() => checkandappend('*')} />
+      <Button title="/" styles={styles} action={() => checkandappend('/')} />
     </View>
   );
 };
+const mapStateToProps = state => ({
+  display: state.calculator.data,
+});
+
+const mapDispatchToProps = {
+  appendDisplay: appendDisplay,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OperatorPad);
 
 const styles = StyleSheet.create({
+  operatorPad: {
+    top: 80,
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 410,
+  },
   button: {
     borderWidth: 3,
     borderColor: 'rgba(0,0,0,0.2)',
@@ -55,15 +54,4 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'white',
   },
-  row: {
-    flexDirection: 'row',
-    width: 400,
-    height: 120,
-  },
-  numericPad: {
-    top: 50,
-    alignItems: 'center',
-  },
 });
-
-export default OperatorPad;

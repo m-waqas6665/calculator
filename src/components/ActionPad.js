@@ -1,48 +1,41 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
 
-const Clear_button = props => {
-  const {setDisplay, number} = props;
-  return (
-    <TouchableOpacity onPress = {() => {setDisplay('')}} style={styles.button}>
-      <Text style={styles.text}> {number} </Text>
-    </TouchableOpacity>
-  );
-};
-const Equal_button = props => {
-  const {setDisplay, display, number} = props;
-  const calculate = () => {
-    let expression = display;
-    setDisplay(eval(expression));
-  };
-
-  return (
-    <TouchableOpacity style={styles.button} onPress={calculate}>
-      <Text style={styles.text}> {number} </Text>
-    </TouchableOpacity>
-  );
-};
-
-const Row = props => {
-  const {setDisplay, display, number} = props;
-  return (
-    <View style={styles.row}>
-      <Clear_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Equal_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
-    </View>
-  );
-};
+import {updateDisplay} from '../actions';
+import Button from './Button';
 
 const ActionPad = props => {
-  const {setDisplay, display} = props;
+  const {updateDisplay, display} = props;
+
+  const clear = () => updateDisplay('');
+
+  const calculate = () => updateDisplay(eval(display));
   return (
-    <View style={styles.numericPad}>
-      <Row number="C=" display={display} setDisplay={setDisplay} />
+    <View style={styles.actionPad}>
+      <Button title="C" styles={styles} action={clear} />
+      <Button title="=" styles={styles} action={calculate} />
     </View>
   );
 };
 
+const mapStateToProps = state => ({
+  display: state.calculator.data,
+});
+
+const mapDispatchToProps = {
+  updateDisplay: updateDisplay,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActionPad);
+
 const styles = StyleSheet.create({
+  actionPad: {
+    top: 100,
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 410,
+  },
   button: {
     borderWidth: 3,
     borderColor: 'rgba(0,0,0,0.2)',
@@ -58,15 +51,4 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: 'black',
   },
-  row: {
-    flexDirection: 'row',
-    width: 400,
-    height: 120,
-  },
-  numericPad: {
-    top: 50,
-    alignItems: 'center',
-  },
 });
-
-export default ActionPad;

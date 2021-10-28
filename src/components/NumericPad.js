@@ -1,63 +1,56 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
 
-const Digit_button = props => {
-  const {setDisplay, display, number} = props;
-  return (
-    <TouchableOpacity onPress={()=>{setDisplay(display+""+number)}} style={styles.button}>
-      <Text style={styles.text}> {number} </Text>
-    </TouchableOpacity>
-  );
-};
-
-const Row = props => {
-  const {setDisplay, display, number} = props;
-  return (
-    <View style={styles.row}>
-      <Digit_button number={number[0]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Digit_button number={number[1]} display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Digit_button number={number[2]} display={display} setDisplay={(val)=>setDisplay(val)} />
-    </View>
-  );
-};
+import {appendDisplay} from '../actions';
+import Button from './Button';
 
 const NumericPad = props => {
-  const {setDisplay, display} = props;
+  const {appendDisplay} = props;
   return (
     <View style={styles.numericPad}>
-      <Row number="123" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number="456" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number="789" display={display} setDisplay={(val)=>setDisplay(val)} />
-      <Row number=".00" display={display} setDisplay={(val)=>setDisplay(val)} />
+      <Button title="1" styles={styles} action={() => appendDisplay('1')} />
+      <Button title="2" styles={styles} action={() => appendDisplay('2')} />
+      <Button title="3" styles={styles} action={() => appendDisplay('3')} />
+      <Button title="4" styles={styles} action={() => appendDisplay('4')} />
+      <Button title="5" styles={styles} action={() => appendDisplay('5')} />
+      <Button title="6" styles={styles} action={() => appendDisplay('6')} />
+      <Button title="7" styles={styles} action={() => appendDisplay('7')} />
+      <Button title="8" styles={styles} action={() => appendDisplay('8')} />
+      <Button title="9" styles={styles} action={() => appendDisplay('9')} />
+      <Button title="." styles={styles} action={() => appendDisplay('.')} />
+      <Button title="0" styles={styles} action={() => appendDisplay('0')} />
+      <Button title="" styles={styles} action={() => {}} />
     </View>
   );
 };
 
+const mapDispatchToProps = {
+  appendDisplay: appendDisplay,
+};
+
+export default connect(null, mapDispatchToProps)(NumericPad);
+
 const styles = StyleSheet.create({
+  numericPad: {
+    top: 70,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     borderWidth: 3,
     borderColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 100,
+    width: 140,
     height: 100,
     backgroundColor: 'black',
     borderRadius: 50,
-    flex: 1,
   },
   text: {
-    fontSize: 30,
+    fontSize: 40,
     color: 'white',
   },
-  row: {
-    flexDirection: 'row',
-    width: 400,
-    height: 120,
-  },
-  numericPad: {
-    top: 50,
-    alignItems: 'center',
-  },
 });
-
-export default NumericPad;
